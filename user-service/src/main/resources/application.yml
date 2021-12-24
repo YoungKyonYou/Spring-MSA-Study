@@ -1,0 +1,18 @@
+server:
+  # 0으로 하면 랜덤 포트를 사용하겠다는 것이다! 즉 포트 충돌 방지
+  port: 0
+
+spring:
+  application:
+    name: user-service
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    #서버의 위치 지정
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+

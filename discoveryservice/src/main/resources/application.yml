@@ -1,0 +1,18 @@
+server:
+  port: 8761
+# 각각의 마이크로 서비스 고유의 아이디 부여
+spring:
+  application:
+    name: discoveryservice
+
+# 유레카 클라이언트 설정이다.
+# 서버인데 왜 클라이언트가 필요하냐면 유레카 라이브러리가 포함된 채로 스프링부트가
+# 기동이 되면 기본적으로 유레카 클라이언트 역할로써 어딘가에 등록하는 작업을 시도한다
+#근데 그중에서 register-with-eureka와 fethc-registry는 기본적으로 true가 된다
+# 이 자신의 정보를 자신에게 등록하는 현상이라서 의미가 없어서 false로 한 것이다.
+# 즉 유레카 서버를 기동하되  자기 정보를 외부에 있는 다른 마이크로 서비스가 유레카 서버로부터
+# 어떤 정보를 주고받는 일을 할 필요가 없기 때문에 자기 자신을 등록하지 않는다는 것이다.
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
