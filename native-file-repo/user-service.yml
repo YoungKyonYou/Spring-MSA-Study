@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: '{cipher}AQBnosFriE3YqpOZ4L7Xo56cA5lOiBDNN8AD63F0XMHhpWMVsgxSrtBXYsjZ7l025d30edaOzA8C11lJXzRXE0OkDL+1/0jeI650LjQEu0sfqruXw74qnA4QFUZSm/9t6Gk1/k6T0s4AkV4pZQEvNNA5ZWjnlIGe2yhOXDWnSDzg7rF5xK6BaAH8jdeBFiNO2Rvxngl0omZg/pryMClaSJtr5vrtHgTyzkqtoJPB8W7p8EZw3PJRZHUYrjhsERgFCdX2f+A+1jFchoLyAR7IF4kmYxMRAAmz8QpGdEWH6OoXwPKx7otDu5fAjteA+QHfx49sutVA3vCJIgyWntyuhVDgqX+PKNk/ZNSNgZu5qriU74U8gRNlleMCunnMYVIb+OQ='
+token:
+  expiration_time: 86400000
+  secret: user_token_native_user_service
+
+gateway:
+  ip: 127.0.0.1
