@@ -67,6 +67,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String userName=((User)authResult.getPrincipal()).getUsername();
         UserDto userDetails=userService.getUserDetailsByEmail(userName);
 
+        System.out.println("토큰:"+env.getProperty("token.secret"));
         String token=Jwts.builder()
                 .setSubject(userDetails.getUserId())
                 //현재 시간+ yml 파일에 있는 유효 시간를 가져오는데 이건 문자열이니까 Long으로 파싱해줘야함

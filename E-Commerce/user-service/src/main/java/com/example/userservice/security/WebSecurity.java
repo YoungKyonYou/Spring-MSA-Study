@@ -27,10 +27,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 //        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
+                //user-service에 접속하면 localhost:port 이렇게 되면서 오류가 뜨는데
+                //localhost말고 아이피로 바꿔줘야함!!! 안 그러면 오류 남!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             .hasIpAddress("127.0.0.1") //<- 내 아이피임 나중에 http://172.30.1.46:11861/welcome 이런식으로 접속하기
                 //아래 필터를 통과 시킨 데이터에 한에서만 권한을 부여하고 작업을 진행하겠다는 것
-            .and().addFilter(getAuthenticationFilter()).formLogin().loginPage("/login");
+            .and().addFilter(getAuthenticationFilter());
 
         http.headers().frameOptions().disable();
     }
