@@ -6,6 +6,7 @@ import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -27,14 +28,20 @@ public class UserController {
     final private Greeting greeting;
     final UserService userService;
 
+    @Timed(value="users.status")
     @GetMapping("/health_check")
     public String status() {
-        return String.format("It's Working in User Service on PORT %s", env.getProperty("local.server.port"));
+        return String.format("It's Working in User Service"
+                + ", port(local.server.port)=" + env.getProperty("local.server.port")
+                + ", port(server.port)=" + env.getProperty("server.port")
+                + ", token secret=" + env.getProperty("token.secret")
+                + ", token expiration time=" + env.getProperty("token.expiration_time"));
     }
 
     @GetMapping("/welcome")
+    @Timed(value="users.welcome",longTask=true)
     public String welcome() {
-      //  System.out.println("아이피:"+request.getRemoteAddr());
+        //  System.out.println("아이피:"+request.getRemoteAddr());
 //        return env.getProperty("greeting.message");
         return greeting.getMessage();
     }
@@ -69,6 +76,7 @@ public class UserController {
     public ResponseEntity<ResponseUser> getUser(@PathVariable String userId) {
         UserDto userDto = userService.getUserByUserId(userId);
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
+        System.out.println("userId:"+userId);
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);
     }
 }
