@@ -1,0 +1,38 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  profiles:
+##    active: native
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          #          uri: file:///Users/dowonlee/Desktop/Work/git-local-repo
+          uri: https://github.com/YoungKyonYou/spring-cloud-config
+          default-label: master
+          skip-ssl-validation: true
+        #          basedir: /Users/dowonlee/Desktop/Work/tmp/config-repo
+
+#        native:
+#          search-locations: file:///Users/nick1/Spring_MSA_Study/native-file-repo
+#private repository 일 시 username 과 password 명시해줘야함
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: heatlh, busrefresh
+
+#http:
+#  sslVerify: false
+
+

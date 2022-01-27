@@ -1,0 +1,9 @@
+encrypt:
+  # 이것으로 key를 쓰겠다. 이것은 암호화하고 복호화할 때 쓰임 노출되면 안됨!
+  # 대칭키 암호화가 적용됨 postman 에서 localhost:8889/encrypt (Post)하고 raw 데이터에 아무 데이터를 쓰고 보내면 확인 가능
+#  key: abcdefghijklmnopqrstuvwxyz0123456789
+  key-store:
+    location: file:///Users/nick1/Spring_MSA_Study/keystore/apiEncryptionKey.jks
+#    location: file:/apiEncryptionKey.jks
+    password: test1234
+    alias: apiEncryptionKey
